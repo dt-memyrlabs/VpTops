@@ -4,7 +4,7 @@
 
 An AI agent that learns to perform talent operations by ingesting organizational data. It doesn't come pre-loaded with hiring expertise — it builds competency from the data you feed it. EOS methodology is the extraction engine.
 
-7 learning modules: Role Definition (T1), Job Ads (T2), Assessment Design (T3), U.S. Compliance (T4), Documentation (T5), Feedback Loop (T6), Profile Matching (T7).
+7 learning modules: Role Design (T1), Candidate Attraction (T2), Assessment Ecosystems (T3), U.S. Hiring Compliance (T4), Documentation & AI Drafting (T5), Continuous Improvement (T6), Profile Matching (T7).
 
 Phase 2 (future): Level System (T8), Performance Prediction (T9).
 
@@ -21,6 +21,7 @@ Phase 2 (future): Level System (T8), Performance Prediction (T9).
 
 | File | Purpose |
 |---|---|
+| `eos/kernel.md` | EOS extraction engine (reference copy) |
 | `.claude/skills/vptops-agent/SKILL.md` | The agent — all 7 modules |
 | `docs/ingestion.md` | How data gets consumed and routed |
 | `docs/bootstrap.md` | First-run guide |
