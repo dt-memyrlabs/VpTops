@@ -12,6 +12,21 @@ VpTops runs on two layers:
 
 2. **Talent Operations skill** (`.claude/skills/vptops-agent/SKILL.md`) — seven learning modules that build competency from ingested data. Each module starts empty and earns its outputs through data coverage (CCI-T tracking).
 
+## How This Maps to the Role
+
+This system was designed to perform the six core functions described in the VP of Talent Operations role:
+
+| Responsibility | System Module | How It Works |
+|---|---|---|
+| Design role specs, org charts, ladders, and RACIs | T1 — Role Definition Engine | Ingests JDs and business needs → extracts 4-8 evaluation dimensions with floor/differentiator/excellence markers per dimension. Produces RACI matrices and org chart impact analysis. |
+| Build AI-assisted job ads and distribution systems | T2 — AI Job Ad Builder | Learns which ad elements correlate with quality applications from org data. Scans for Paper Ceiling, age-proxy, and credential-gatekeeping anti-patterns. Generates variants with channel recommendations. |
+| Design screening and assessment ecosystems | T3 — Assessment Ecosystem Designer | Builds staged assessment pipelines mapped to T1 dimensions. Front-loads objective evaluation (cognitive screen → skill test → blind-graded work sample) before structured interviews. Calibrates thresholds against post-hire performance. |
+| Apply U.S. hiring compliance knowledge | T4 — U.S. Compliance Layer | Maintains a constraint graph of EEOC, ADEA, ADA, FLSA, and W-2/1099 nodes. Auto-scans every T1-T3 output for violations at Tier 1 autonomy. Decision frameworks, not legal advice. |
+| Document decisions and leverage AI for drafts | T5 — Documentation & AI Drafting Engine | Learns org documentation patterns, generates drafts in that style. Maintains tagged decision logs (routine vs. irreversible). Produces variant batches for multi-context documents. |
+| Use post-hire data to continuously improve | T6 — Feedback Loop Engine | Ingests 30/60/90-day reviews and retention data. Detects assessment-to-performance mismatches (2 = propose amendment, 3 = mandatory). Triggers cascade recalibration across T1-T5. |
+
+T7 (Profile Pattern Matching) extends beyond the role description — it matches candidate profiles against learned success patterns and calibrates against known good/bad hires.
+
 ## What the System Operates
 
 | Module | Function |
