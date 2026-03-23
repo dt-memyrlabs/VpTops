@@ -129,7 +129,77 @@ CCI-T 100% with all modules passing: pipeline convergence candidate.
 - Blind grading rubrics
 - Threshold recommendations with confidence levels
 
-**Autonomy:** Tier 2 for design. Tier 3 for threshold approval (I-tagged).
+### T3.5: Screening Execution Mode
+
+T3 designs assessments. T3.5 runs them. When activated, the agent conducts a live screening conversation against T1 dimensions.
+
+**Trigger:** `"Screen this candidate for [role]"` or `"Run screening on [name]"` — requires T1 locked dimensions for the target role.
+
+**How it works:**
+
+1. **Dimension queue** — Load T1 dimensions for the role. Each dimension enters the queue as UNPROBED. The agent works through dimensions, but the conversation flows naturally — it doesn't announce "now testing dimension 3."
+
+2. **Opening** — One open question per dimension. Framed around what the candidate has done, not what they know. "Walk me through how you [dimension-relevant action]" not "What do you know about [topic]."
+
+3. **Depth probing (EOS Rule 8 mechanics):**
+   - **Surface detection** — If the answer is title-level ("I managed a team of 10"), classify as SURFACE. Do not score yet.
+   - **Context probe** — Probe for what produced the observation: "What was the team working on when you took over, and what changed?" Not re-asking — entering the problem from a different angle.
+   - **Indirect answer handling** — When a candidate talks around a dimension instead of addressing it directly, DO NOT redirect or re-ask. Listen for signal in the indirect answer. The tangent may contain context-level evidence on THIS dimension or reveal signal on a DIFFERENT dimension. Tag what you find, note which dimension it maps to, and continue.
+   - **Dimension ambiguity** — If after one context probe the answer is still ambiguous (not clearly surface, not clearly context), ask ONE different-angle question on the same dimension. If still ambiguous after that, close at current depth and move on. Do not loop.
+   - **Let them explain** — When a candidate starts elaborating, do not interrupt or redirect to stay on script. Extended answers contain the richest signal. Score after they finish, not during.
+
+4. **Real-time scoring:**
+   Each answer gets tagged immediately (internal, not shown to candidate):
+   ```
+   DIMENSION: [name]
+   Response depth: SURFACE / PARTIAL / CONTEXT
+   Evidence: [specific claim from their answer]
+   Confidence: HIGH / MEDIUM / LOW
+   Probes used: [count] of 2 max
+   ```
+   SURFACE caps the dimension at LOW confidence. CONTEXT is eligible for HIGH. PARTIAL gets one more probe before closing.
+
+5. **Cross-dimension signal capture** — When a candidate's answer to dimension A reveals evidence about dimension B, capture it. Tag it to dimension B's evidence pool. This is how indirect answers create value — the candidate isn't dodging, they're showing how they think.
+
+6. **Completion** — After all dimensions are probed (or closed at current depth), produce a screening scorecard:
+   ```
+   SCREENING SCORECARD
+   ═══════════════════
+   Candidate: [name]
+   Role: [target role]
+   Date: [screening date]
+   Dimensions probed: [X of Y]
+
+   | Dimension | Depth Reached | Score | Confidence | Key Evidence |
+   |-----------|--------------|-------|------------|-------------|
+
+   RECOMMEND: [ADVANCE / HOLD / DECLINE]
+   Basis: [X dimensions at Q1+, confidence distribution]
+
+   GAPS REQUIRING DEEPER ASSESSMENT
+   - [dimensions with LOW confidence — need Stage 2/3 testing]
+
+   NOTABLE SIGNALS (from indirect answers)
+   - [cross-dimension evidence captured during screening]
+   ```
+
+7. **Calibration feedback** — After hire outcome is known, T6 compares screening scores to job performance. Screening questions that predicted well get regression-locked. Questions that missed get re-examined.
+
+**What makes this different from a standard chatbot screen:**
+- Does not re-ask when candidates give indirect answers — mines the indirect answer for signal first
+- Probes for the experience that produced the claim, not the claim itself
+- Scores on evidence depth, not keyword matching
+- Captures cross-dimension signal from tangential answers
+- Closes dimensions at current depth rather than looping — avoids interrogation feel
+- Lets candidates explain themselves before scoring
+
+**Autonomy:** Tier 2 for conducting screens (DT notified). Tier 3 for advance/decline recommendations.
+
+**Pattern persistence:** Screening patterns and question effectiveness saved to `patterns/[org]/assessment-design.md`.
+
+---
+
+**Autonomy (T3 overall):** Tier 2 for design. Tier 3 for threshold approval (I-tagged).
 
 **Pattern persistence:** Saved to `patterns/[org]/assessment-design.md`.
 
