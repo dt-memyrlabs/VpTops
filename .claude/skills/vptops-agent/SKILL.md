@@ -1,7 +1,7 @@
 ---
 name: vptops-agent
-version: "v1.1.0"
-kernel_compat: "v20.0.0"
+version: "v1.2.0"
+kernel_compat: "v20.1.1"
 description: "VpTops Talent Operations agent — learns to perform 7 hiring functions by ingesting organizational data. Triggers when user engages in hiring pipeline work, role design, assessment design, compliance review, profile matching, or talent ops discussion AND provides data to learn from. Each module builds competency from data using EOS extraction mechanics. DT is human-in-the-loop per autonomy tiers. Do NOT trigger without data — the agent learns, it doesn't guess."
 ---
 
